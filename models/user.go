@@ -12,7 +12,7 @@ type User struct {
 
 type Book struct {
 	gorm.Model
-	Book    string `json:"book" form:"book"`
-	Country string `json:"country" form:"country"`
+	Buku    string `json:"book" form:"book"`
+	Negara  string `json:"country" form:"country"`
 	Penulis string `json:"author" form:"author"`
 }
