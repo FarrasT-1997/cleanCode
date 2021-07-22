@@ -14,5 +14,5 @@ type Book struct {
 	gorm.Model
 	Book    string `json:"book" form:"book"`
 	Country string `json:"country" form:"country"`
-	Penulis string `json:"author" form:"author"`
+	Author  string `json:"author" form:"author"`
 }
