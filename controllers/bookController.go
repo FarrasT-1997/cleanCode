@@ -9,26 +9,26 @@ import (
 	"github.com/labstack/echo"
 )
 
-////////////////USER///////////////////////
-func GetUserControllers(c echo.Context) error {
-	users, err := database.GetUsers()
+////////////////BOOK///////////////////////
+func GetBooksControllers(c echo.Context) error {
+	books, err := database.GetBooks()
 	if err != nil {
 		return echo.NewHTTPError(http.StatusBadRequest, err.Error())
 	}
 	return c.JSON(http.StatusOK, map[string]interface{}{
 		"message": "Success",
-		"users":   users,
+		"users":   books,
 	})
 }
 
-func GetOneUserControllers(c echo.Context) error {
+func GetOneBookControllers(c echo.Context) error {
 	id, err := strconv.Atoi(c.Param("id"))
 	if err != nil {
 		return c.JSON(http.StatusBadRequest, map[string]interface{}{
 			"message": "invalid id",
 		})
 	}
-	users, err := database.GetOneUser(id)
+	book, err := database.GetOneBook(id)
 	if err != nil {
 		return c.JSON(http.StatusInternalServerError, map[string]interface{}{
 			"message": "cannot fetch data",
@@ -36,14 +36,14 @@ func GetOneUserControllers(c echo.Context) error {
 	}
 	return c.JSON(http.StatusOK, map[string]interface{}{
 		"message": "success",
-		"data":    users,
+		"data":    book,
 	})
 }
 
-func CreateUserControllers(c echo.Context) error {
-	add_user := models.User{}
-	c.Bind(&add_user)
-	user, err := database.CreateUser(add_user)
+func CreateBookControllers(c echo.Context) error {
+	add_book := models.Book{}
+	c.Bind(&add_book)
+	book, err := database.CreateBook(add_book)
 	if err != nil {
 		return c.JSON(http.StatusInternalServerError, map[string]interface{}{
 			"message": "cannot insert data",
@@ -51,20 +51,20 @@ func CreateUserControllers(c echo.Context) error {
 	}
 	return c.JSON(http.StatusOK, map[string]interface{}{
 		"message": "success",
-		"data":    user,
+		"data":    book,
 	})
 }
 
-func EditUserControllers(c echo.Context) error {
+func EditBooksControllers(c echo.Context) error {
 	id, err := strconv.Atoi(c.Param("id"))
 	if err != nil {
 		return c.JSON(http.StatusBadRequest, map[string]interface{}{
 			"message": "invalid id",
 		})
 	}
-	edit_user, err := database.GetOneUser(id)
-	c.Bind(&edit_user)
-	user, err := database.Edituser(edit_user)
+	edit_book, err := database.GetOneBook(id)
+	c.Bind(&edit_book)
+	book, err := database.EditBook(edit_book)
 	if err != nil {
 		return c.JSON(http.StatusInternalServerError, map[string]interface{}{
 			"message": "cannot edit data",
@@ -72,18 +72,18 @@ func EditUserControllers(c echo.Context) error {
 	}
 	return c.JSON(http.StatusOK, map[string]interface{}{
 		"message": "success",
-		"data":    user,
+		"data":    book,
 	})
 }
 
-func DeleteUserControllers(c echo.Context) error {
+func DeleteBookControllers(c echo.Context) error {
 	id, err := strconv.Atoi(c.Param("id"))
 	if err != nil {
 		return c.JSON(http.StatusBadRequest, map[string]interface{}{
 			"message": "invalid id",
 		})
 	}
-	user, err := database.DeleteUser(id)
+	book, err := database.DeleteBook(id)
 	if err != nil {
 		return c.JSON(http.StatusInternalServerError, map[string]interface{}{
 			"message": "cannot delete data",
@@ -91,6 +91,6 @@ func DeleteUserControllers(c echo.Context) error {
 	}
 	return c.JSON(http.StatusOK, map[string]interface{}{
 		"message": "success",
-		"data":    user,
+		"data":    book,
 	})
 }

@@ -9,6 +9,7 @@ import (
 	"github.com/labstack/echo"
 )
 
+//Make New Token when user login
 func CreateToken(userId int) (string, error) {
 	claims := jwt.MapClaims{}
 	claims["authorized"] = true
@@ -18,6 +19,7 @@ func CreateToken(userId int) (string, error) {
 	return token.SignedString([]byte(constant.SECRET_JWT))
 }
 
+//Search userId based on token for authorization
 func ExtractTokenUserId(c echo.Context) int {
 	user := c.Get("user").(*jwt.Token)
 	fmt.Println(user.Valid)

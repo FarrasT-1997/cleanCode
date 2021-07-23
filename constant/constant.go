@@ -1,3 +1,3 @@
 package constant
 
-const SECRET_JWT = "MySecretPass"
+const SECRET_JWT = "legal"
